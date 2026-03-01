@@ -4,10 +4,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const stats = [
-  { value: "27+", label: "년 업력" },
+  { value: "30+", label: "년 업력" },
   { value: "현대·기아", label: "협력업체" },
-  { value: "50+", label: "프레스 설비" },
-  { value: "99.8%", label: "품질 합격률" },
+  { value: "대형 프레스", label: "자동화 라인" },
+  { value: "ZERO", label: "품질 불량 zero화" },
 ];
 
 const services = [
@@ -17,13 +17,8 @@ const services = [
     img: "/images/equipment.jpeg",
   },
   {
-    title: "금형 설계·제작",
-    desc: "자체 금형 설계 및 제작으로 원스톱 생산 체계를 구축하고 있습니다",
-    img: "/images/factory1.jpeg",
-  },
-  {
     title: "품질 관리",
-    desc: "ISO/TS 16945 인증 기반의 엄격한 품질관리로 99.8% 이상 합격률을 달성합니다",
+    desc: "ISO 9001 인증 기반의 엄격한 품질관리로 품질 불량 zero화를 실현합니다",
     img: "/images/factory-main.jpeg",
   },
 ];
@@ -35,10 +30,11 @@ const facilities = [
 ];
 
 const history = [
+  { year: "2025", items: [{ month: "", text: "ISO 9001, ISO 14001 인증" }] },
   { year: "2011", items: [{ month: "05", text: "부품·소재 전문 기업 확인" }, { month: "01", text: "자립형 유망 중소 기업 인증" }] },
   { year: "2009", items: [{ month: "11", text: "경영혁신형 중소기업 선정" }] },
   { year: "2008", items: [{ month: "04", text: "공장증축 (997㎡)" }, { month: "", text: "INO-BIZ 인증" }] },
-  { year: "2003", items: [{ month: "01", text: "ISO/TS 16945 인증" }] },
+  { year: "2003", items: [{ month: "01", text: "ISO 9001 인증" }] },
   { year: "2002", items: [{ month: "07", text: "공장이전 (광주 평동 공단)" }] },
   { year: "2001", items: [{ month: "01", text: "외국인 투자기업 등록" }] },
   { year: "2000", items: [{ month: "02", text: "강제 인공 어초 실용실안 등록" }] },
@@ -139,7 +135,7 @@ export default function HomePage() {
                 1997년 설립 이후 1998년 현대자동차, 1999년 기아자동차 협력업체로 등록되어 자동차 차체 부품을 안정적으로 공급하고 있습니다.
               </p>
               <p>
-                ISO/TS 16945 인증, INO-BIZ 인증, 부품·소재 전문기업 확인 등 다수의 인증을 획득하며 기술력과 품질을 인정받고 있습니다.
+                ISO 9001, ISO 14001, INO-BIZ 인증, 부품·소재 전문기업 확인 등 다수의 인증을 획득하며 기술력과 품질을 인정받고 있습니다.
               </p>
               <p>
                 2002년 광주 평동공단으로 이전, 2008년 공장 증축(997㎡)을 거쳐 지속적으로 생산 역량을 확대하고 있습니다.
@@ -194,10 +190,10 @@ export default function HomePage() {
             <h2 className="text-4xl font-bold text-text-dark mb-3">사업영역</h2>
             <div className="w-[60px] h-[3px] bg-primary mx-auto mb-4" />
             <p className="text-text-gray">
-              자동차 차체용 부품 프레스 가공부터 금형 제작까지 토탈 솔루션을 제공합니다
+              자동차 차체용 부품 프레스 가공과 철저한 품질관리 체계를 갖추고 있습니다
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {services.map((svc) => (
               <div
                 key={svc.title}
@@ -267,7 +263,7 @@ export default function HomePage() {
         <div className="max-w-[1440px] mx-auto px-6 lg:px-20 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">문의 및 상담</h2>
           <p className="text-white/70 mb-8">
-            자동차 차체 부품, 금형 제작 등 제품 관련 문의를 환영합니다
+            자동차 차체 부품 관련 문의를 환영합니다
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-8 mb-8">
             <div className="flex items-center gap-2">
