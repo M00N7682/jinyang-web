@@ -1,11 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { notices } from "@/data/notices";
+import { getNotices } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
 
 const PER_PAGE = 5;
 
@@ -13,21 +11,23 @@ function isNew(dateStr: string) {
   const d = new Date(dateStr.replace(/\./g, "-"));
   const now = new Date();
   const diff = now.getTime() - d.getTime();
-  return diff < 14 * 24 * 60 * 60 * 1000; // 14일 이내
+  return diff < 14 * 24 * 60 * 60 * 1000;
 }
 
-function NoticeList() {
-  const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page") || "1");
-  const totalPages = Math.ceil(notices.length / PER_PAGE);
-  const sorted = [...notices].sort((a, b) => b.id - a.id);
-  const paged = sorted.slice(
-    (currentPage - 1) * PER_PAGE,
-    currentPage * PER_PAGE
-  );
+export default async function NoticePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page } = await searchParams;
+  const currentPage = Number(page || "1");
+  const { notices, total } = await getNotices(currentPage, PER_PAGE);
+  const totalPages = Math.ceil(total / PER_PAGE);
 
   return (
     <>
+      <Header />
+
       {/* Hero Banner */}
       <section className="bg-primary py-16 lg:py-20 px-6 lg:px-20">
         <div className="max-w-[1440px] mx-auto">
@@ -48,7 +48,7 @@ function NoticeList() {
         <div className="max-w-[1440px] mx-auto">
           <div className="flex items-center justify-between mb-4">
             <p className="text-sm text-text-gray">
-              총 <strong className="text-text-dark">{notices.length}</strong>건
+              총 <strong className="text-text-dark">{total}</strong>건
             </p>
           </div>
 
@@ -61,7 +61,7 @@ function NoticeList() {
           </div>
 
           {/* Rows */}
-          {paged.map((n) => (
+          {notices.map((n) => (
             <Link
               key={n.id}
               href={`/notice/${n.id}`}
@@ -87,81 +87,69 @@ function NoticeList() {
             </Link>
           ))}
 
-          {paged.length === 0 && (
+          {notices.length === 0 && (
             <div className="py-20 text-center text-text-gray">
               등록된 공지사항이 없습니다.
             </div>
           )}
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 pt-8">
-            <Link
-              href={`/notice?page=${Math.max(1, currentPage - 1)}`}
-              className="w-9 h-9 flex items-center justify-center bg-bg-light rounded text-text-gray hover:bg-border transition-colors"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </Link>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          {totalPages > 0 && (
+            <div className="flex justify-center items-center gap-2 pt-8">
               <Link
-                key={p}
-                href={`/notice?page=${p}`}
-                className={`w-9 h-9 flex items-center justify-center text-sm font-semibold rounded transition-colors ${
-                  p === currentPage
-                    ? "bg-primary text-white"
-                    : "bg-bg-light text-text-gray hover:bg-border"
-                }`}
+                href={`/notice?page=${Math.max(1, currentPage - 1)}`}
+                className="w-9 h-9 flex items-center justify-center bg-bg-light rounded text-text-gray hover:bg-border transition-colors"
               >
-                {p}
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
               </Link>
-            ))}
-            <Link
-              href={`/notice?page=${Math.min(totalPages, currentPage + 1)}`}
-              className="w-9 h-9 flex items-center justify-center bg-bg-light rounded text-text-gray hover:bg-border transition-colors"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                <Link
+                  key={p}
+                  href={`/notice?page=${p}`}
+                  className={`w-9 h-9 flex items-center justify-center text-sm font-semibold rounded transition-colors ${
+                    p === currentPage
+                      ? "bg-primary text-white"
+                      : "bg-bg-light text-text-gray hover:bg-border"
+                  }`}
+                >
+                  {p}
+                </Link>
+              ))}
+              <Link
+                href={`/notice?page=${Math.min(totalPages, currentPage + 1)}`}
+                className="w-9 h-9 flex items-center justify-center bg-bg-light rounded text-text-gray hover:bg-border transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
-    </>
-  );
-}
 
-export default function NoticePage() {
-  return (
-    <>
-      <Header />
-      <Suspense
-        fallback={
-          <div className="py-40 text-center text-text-gray">로딩 중...</div>
-        }
-      >
-        <NoticeList />
-      </Suspense>
       <Footer />
     </>
   );

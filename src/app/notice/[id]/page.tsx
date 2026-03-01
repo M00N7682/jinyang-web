@@ -2,11 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { notices } from "@/data/notices";
+import { getNoticeById, getAdjacentNotices, incrementViews } from "@/lib/db";
 
-export function generateStaticParams() {
-  return notices.map((n) => ({ id: String(n.id) }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function NoticeDetail({
   params,
@@ -14,16 +12,15 @@ export default async function NoticeDetail({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const notice = notices.find((n) => n.id === Number(id));
+  const notice = await getNoticeById(Number(id));
 
   if (!notice) {
     notFound();
   }
 
-  const sorted = [...notices].sort((a, b) => b.id - a.id);
-  const idx = sorted.findIndex((n) => n.id === notice.id);
-  const prev = idx < sorted.length - 1 ? sorted[idx + 1] : null;
-  const next = idx > 0 ? sorted[idx - 1] : null;
+  await incrementViews(Number(id));
+
+  const { prev, next } = await getAdjacentNotices(Number(id));
 
   return (
     <>
