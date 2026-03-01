@@ -3,7 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const marqueeText = "30+ 년 업력  ·  현대·기아 협력업체  ·  대형 프레스 자동화 라인  ·  품질 불량 ZERO화  ·  ISO 9001 / ISO 14001 인증  ·  광주 평동공단 소재";
+const marqueeText = "30+ 년 업력  ·  현대·기아자동차 Tier2 협력업체  ·  대형 SIMPAC 프레스 자동화 라인 보유  ·  품질 불량 ZERO화 달성  ·  ISO 9001 / ISO 14001 환경경영시스템 인증  ·  광주광역시 평동공단 소재  ·  자동차 차체용 신품 부품 전문 제조기업  ·  INO-BIZ 경영혁신형 중소기업  ·  부품·소재 전문기업 인증";
 
 const services = [
   {
