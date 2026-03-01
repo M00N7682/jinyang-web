@@ -1,0 +1,33 @@
+import Link from "next/link";
+
+export default function Footer() {
+  return (
+    <footer className="bg-bg-dark text-white">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-12">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold">(주)진양산업</h3>
+            <div className="space-y-1 text-sm text-white/60">
+              <p>광주광역시 광산구 평동산단로 00 (평동공단)</p>
+              <p>TEL: 062-000-0000 | FAX: 062-000-0001</p>
+              <p>EMAIL: info@jinyang.co.kr</p>
+            </div>
+          </div>
+          <div className="flex gap-8 text-sm text-white/60">
+            <Link href="#" className="hover:text-white transition-colors">
+              개인정보처리방침
+            </Link>
+            <Link href="#" className="hover:text-white transition-colors">
+              이용약관
+            </Link>
+          </div>
+        </div>
+        <div className="border-t border-white/10 mt-8 pt-8">
+          <p className="text-xs text-white/40">
+            &copy; 2026 (주)진양산업. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
