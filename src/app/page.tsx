@@ -3,12 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const stats = [
-  { value: "30+", label: "년 업력" },
-  { value: "현대·기아", label: "협력업체" },
-  { value: "대형 프레스", label: "자동화 라인" },
-  { value: "ZERO", label: "품질 불량 zero화" },
-];
+const marqueeText = "30+ 년 업력  ·  현대·기아 협력업체  ·  대형 프레스 자동화 라인  ·  품질 불량 ZERO화  ·  ISO 9001 / ISO 14001 인증  ·  광주 평동공단 소재";
 
 const services = [
   {
@@ -91,16 +86,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="bg-primary-dark">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center py-4">
-              <div className="text-3xl lg:text-[40px] font-extrabold text-white">
-                {s.value}
-              </div>
-              <div className="text-sm text-white/70 mt-2">{s.label}</div>
-            </div>
+      {/* Marquee */}
+      <section className="bg-primary-dark overflow-hidden py-4">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(4)].map((_, i) => (
+            <span
+              key={i}
+              className="mx-8 text-sm lg:text-base font-semibold text-white/80 tracking-wide"
+            >
+              {marqueeText}
+            </span>
           ))}
         </div>
       </section>
