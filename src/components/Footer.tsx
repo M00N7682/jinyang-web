@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Footer() {
   return (
     <footer className="bg-bg-dark text-white">
@@ -12,14 +10,6 @@ export default function Footer() {
               <p>광주광역시 광산구 평동산단2번로 132</p>
               <p>TEL: 062-944-5371 | FAX: 062-944-5372</p>
             </div>
-          </div>
-          <div className="flex gap-8 text-sm text-white/60">
-            <Link href="#" className="hover:text-white transition-colors">
-              개인정보처리방침
-            </Link>
-            <Link href="#" className="hover:text-white transition-colors">
-              이용약관
-            </Link>
           </div>
         </div>
         <div className="border-t border-white/10 mt-8 pt-8">
