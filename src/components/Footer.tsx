@@ -8,8 +8,9 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold">(주)진양산업</h3>
             <div className="space-y-1 text-sm text-white/60">
-              <p>광주광역시 광산구 평동산단로 00 (평동공단)</p>
-              <p>TEL: 062-000-0000 | FAX: 062-000-0001</p>
+              <p>대표: 윤재국</p>
+              <p>광주광역시 광산구 평동산단2번로 132</p>
+              <p>TEL: 062-944-5371 | FAX: 062-944-5372</p>
               <p>EMAIL: info@jinyang.co.kr</p>
             </div>
           </div>
