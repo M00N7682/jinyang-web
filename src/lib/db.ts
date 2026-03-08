@@ -8,8 +8,13 @@ export interface Notice {
   content: string;
 }
 
+const connectionString = (process.env.POSTGRES_URL || "").replace(
+  /(\?|&)sslmode=[^&]*/g,
+  "$1"
+);
+
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
+  connectionString,
   ssl: { rejectUnauthorized: false },
 });
 
