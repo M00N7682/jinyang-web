@@ -11,7 +11,6 @@ export default function Footer() {
               <p>대표: 윤재국</p>
               <p>광주광역시 광산구 평동산단2번로 132</p>
               <p>TEL: 062-944-5371 | FAX: 062-944-5372</p>
-              <p>EMAIL: info@jinyang.co.kr</p>
             </div>
           </div>
           <div className="flex gap-8 text-sm text-white/60">
