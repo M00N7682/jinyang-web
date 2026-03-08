@@ -8,8 +8,6 @@ const navLinks = [
   { label: "사업영역", href: "/#services" },
   { label: "시설현황", href: "/#facilities" },
   { label: "공지사항", href: "/notice" },
-  { label: "인증/수상", href: "/#about" },
-  { label: "오시는 길", href: "/#contact" },
 ];
 
 export default function Header() {
